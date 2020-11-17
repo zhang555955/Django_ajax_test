@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ajaxexample</title>
+</head>
+<body>
+    <button onclick="getData()">按一下</button>
+    <script>
+        try{
+            xmlhttp = new ActiveXObject('Msxml2.XMLHTTP');
+        }catch (e) {
+            try {
+                xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+            } catch (e1) {
+                xmlhttp = new XMLHttpRequest();
+            }
+        }
+        function updatePage(){
+            console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                console.log(xmlhttp.readyState);
+                console.log(xmlhttp.status);
+            console.log("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var response = xmlhttp.responseText;
+                    console.log(response)
+                }
+        }
+        function getData(){
+            url = '/ajaxData/';
+            xmlhttp.open('GET',url,true);
+            xmlhttp.onreadystatechange = updatePage;
+            xmlhttp.send(null);
+        }
+        console.log(xmlhttp)
+    </script>
+</body>
+</html>
